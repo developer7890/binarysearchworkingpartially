@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <p>This program will perform  binary search on a sorted array</p>
+    <p id="element"></p>
+  </body>
+  <script>
+    $(document).ready(function(){
+      var myarray=  [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+      var myarray1= [137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152];
+      var myarray2= [237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252];
+      var myarray3= [333,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352];
+      var myarray4= [437,438,439,440,441,442,443,444,445,446,447,448,449,450,451,452, 453];
+      var myarray5= [537,538,539,540,541,542,543,544,545,546,547,548,549,550,551,552];
+      var myarray6= [637,638,639,640];
+      var myarray7= [720,721,722,723,724,725,726,727,728,729,730,731,732,733,734,735];
+
+      var superarray = [myarray, myarray1, myarray2, myarray3, myarray4, myarray5, myarray6, myarray7];
+
+      function searchsubarray(arrayparameter,searchvalue){
+        var k,subarray,counter=0;
+        //replace 8 and 15 with known variables. Make the code independent of what size arrays are.
+        //TODO - okwhat happens if searchvalue is 736. Your k will be 8. and subarray is unknown.hmmm....changes karta hun bhaiya
+
+        for(k=0;k<arrayparameter.length;){
+              var m = arrayparameter[k].length-1;
+          if(arrayparameter[k][m]<searchvalue){////fixME: INDEX out of bound error---bhaiya fixed --arrayparameter[k].length-1;
+            k++;
+          }
+          else{
+            subarray=arrayparameter[k];
+            counter=1;
+            break;
+          }
+        }
+         if(counter===0){
+           $("#element").html("entered value not present in array");/// bhaiaya this portion not working...
+         }
+
+          binarysearch(subarray,searchvalue);
+      }
+      function binarysearch(array,value){
+        var startindex= 0;
+        var endindex= array.length-1;
+        var middle;
+        while(startindex<=endindex){
+          middle=Math.floor((startindex+endindex)/2);
+          if(value==array[middle]){
+            $("#element").html(value+" found at position "+(middle+1));
+            return;
+          }
+          else if(value<array[middle]){
+            endindex=middle-1;
+          }
+          else if(value>array[middle]){
+            startindex=middle+1;
+          }
+       }
+          $("#element").html("entered value not present in array");
+     }
+    searchsubarray(superarray,1);
+  });
+    </script>
+</html>
